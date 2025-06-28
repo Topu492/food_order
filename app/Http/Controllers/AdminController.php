@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
 class AdminController extends Controller
 {
     public function AdminLogin()
@@ -31,16 +32,25 @@ class AdminController extends Controller
 
         ];
 
-        if(Auth::guard('admin')->attempt($data)){
-            return redirect()->route('admin.dashboard')->with('success','Login Successfully');
-        }
-        else{
-           return redirect()->route('admin.login')->with('error','Invalid Creadentials'); 
+        if (Auth::guard('admin')->attempt($data)) {
+            return redirect()->route('admin.dashboard')->with('success', 'Login Successfully');
+        } else {
+            return redirect()->route('admin.login')->with('error', 'Invalid Creadentials');
         }
     }
 
-    public function AdminLogout(){
+    public function AdminLogout()
+    {
         Auth::guard('admin')->logout();
-        return redirect()->route('admin.login')->with('success','Logout Success');
+        return redirect()->route('admin.login')->with('success', 'Logout Success');
+    }
+
+    public function AdminForgetPassword()
+    {
+        return view('admin.forget_password');
+    }
+
+    public function AdminPasswordSubmit(Request $request){
+
     }
 }
