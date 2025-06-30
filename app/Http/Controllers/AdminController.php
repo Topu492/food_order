@@ -97,4 +97,13 @@ $request->validate([
         $admin->update();
         return redirect()->route('admin.login')->with('success',"Password Reset Successfully");
     }
+
+    
+  public function AdminProfile(){
+        $id = Auth::guard('admin')->id();
+        $profileData = Admin::find($id);
+        return view('admin.admin_profile',compact('profileData'));
+     }   
+    
+
 }

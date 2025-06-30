@@ -185,7 +185,7 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="apps-contacts-profile.html"><i
+                    <a class="dropdown-item" href="{{ route('admin.profile') }}"><i
                             class="mdi mdi mdi-face-man font-size-16 align-middle me-1"></i> Profile</a>
                     <a class="dropdown-item" href="auth-lock-screen.html"><i
                             class="mdi mdi-lock font-size-16 align-middle me-1"></i> Lock Screen</a>
