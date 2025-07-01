@@ -128,7 +128,11 @@ $request->validate([
            }
         }
         $data->save();
-        return redirect()->back();
+        $notification = array(
+            'message' => 'Profile Update Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
     }
      // End Method 
      private function deleteOldImage(string $oldPhotoPath): void {
@@ -139,3 +143,4 @@ $request->validate([
      }
      // End Private Method 
 }
+
