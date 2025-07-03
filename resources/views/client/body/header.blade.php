@@ -60,18 +60,12 @@
                     </form>
                 </div>
             </div>
-
-
-
             <div class="dropdown d-none d-sm-inline-block">
                 <button type="button" class="btn header-item" id="mode-setting-btn">
                     <i data-feather="moon" class="icon-lg layout-mode-dark"></i>
                     <i data-feather="sun" class="icon-lg layout-mode-light"></i>
                 </button>
             </div>
-
-
-
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item noti-icon position-relative"
                     id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -184,7 +178,7 @@
                     id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <img class="rounded-circle header-profile-user"
-                        src="{{ !empty($profileData->photo) ? url('upload/admin_images/' . $profileData->photo) : url('upload/no_image.jpg') }}"
+                        src="{{ !empty($profileData->photo) ? url('upload/client_images/' . $profileData->photo) : url('upload/no_image.jpg') }}"
                         alt="Header Avatar">
                     <span class="d-none d-xl-inline-block ms-1 fw-medium">{{ $profileData->name }}</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
@@ -193,7 +187,7 @@
                     <!-- item-->
                     <a class="dropdown-item" href="{{ route('client.profile') }}"><i
                             class="mdi mdi mdi-face-man font-size-16 align-middle me-1"></i> Profile</a>
-                    <a class="dropdown-item" href="{{ route('admin.change.password') }}"><i
+                    <a class="dropdown-item" href="{{ route('client.change.password') }}"><i
                             class="mdi mdi-lock font-size-16 align-middle me-1"></i> Change Password</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ route('client.logout') }}"><i
