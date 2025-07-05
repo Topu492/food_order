@@ -20,11 +20,7 @@
                         aria-expanded="false">
                         Restaurants
                     </a>
-
                 </li>
-
-
-
                 @auth
                     @php
                         $id = Auth::user()->id;
@@ -42,7 +38,6 @@
                                 Dashboard</a>
                             <a class="dropdown-item" href="{{ route('user.logout') }}"><i class="icofont-sale-discount"></i>
                                 Logout </a>
-
                         </div>
                     </li>
                 @else
