@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Client\ResturantController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -90,3 +91,20 @@ Route::middleware('admin')->group(function () {
 
 
     });
+
+
+    // Start Client Middleware
+    Route::middleware('client')->group(function () {
+
+    Route::controller(ResturantController::class)->group(function(){
+        Route::get('/all/menu', 'AllMenu')->name('all.menu');
+        Route::get('/add/menu', 'AddMenu')->name('add.menu');
+        Route::post('/store/menu', 'StoreMenu')->name('store.menu');
+        Route::get('/edit/menu/{id}', 'EditMenu')->name('edit.menu');
+        Route::post('/update/menu', 'UpdateMenu')->name('update.menu');
+        Route::get('/delete/menu/{id}', 'DeleteMenu')->name('delete.menu');
+       
+    });
+    
+});
+ // End Client Middleware
