@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\CityController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -77,3 +78,15 @@ Route::middleware('admin')->group(function () {
     });
 
 });
+
+  Route::controller(CityController::class)->group(function () {
+        Route::get('/all/city', 'AllCity')->name('all.city');
+        Route::get('/add/city', 'AddCity')->name('add.city');
+        Route::post('/store/city', 'StoreCity')->name('city.store');
+        Route::get('/edit/city/{id}', 'EditCity');
+        Route::post('/update/city', 'UpdateCity')->name('update.city');
+        Route::get('/delete/city/{id}', 'DeleteCity')->name('delete.city');
+       
+
+
+    });

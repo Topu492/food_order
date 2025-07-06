@@ -5,9 +5,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-class Category extends Model
+class City extends Model
 {
-      use HasFactory, Notifiable;
-        protected $guarded = [];
+     use HasFactory, Notifiable;
+    protected $guarded = [];
+
 }
