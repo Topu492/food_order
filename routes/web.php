@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Client\GalleryController;
 use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\ResturantController;
 use Illuminate\Support\Facades\Route;
@@ -115,6 +116,18 @@ Route::middleware('admin')->group(function () {
         Route::post('/update/product', 'UpdateProduct')->name('update.product');
         Route::get('/delete/product/{id}', 'DeleteProduct')->name('delete.product');
         Route::get('/changeStatus', 'ChangeStatus');
+      
+       
+    });
+
+     Route::controller(GalleryController::class)->group(function(){
+        Route::get('/all/gallery', 'AllGallery')->name('all.gallery');
+        Route::get('/add/gallery', 'AddGallery')->name('add.gallery');
+        Route::post('/store/gallery', 'StoreGallery')->name('store.gallery');
+        Route::get('/edit/gallery/{id}', 'EditGallery')->name('edit.gallery');
+        Route::post('/update/gallery', 'UpdateGallery')->name('update.gallery');
+        Route::get('/delete/gallery/{id}', 'DeleteGallery')->name('delete.gallery');
+        
       
        
     });
