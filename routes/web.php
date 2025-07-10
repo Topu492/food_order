@@ -2,13 +2,14 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\Client\CouponController;
 use App\Http\Controllers\Client\GalleryController;
 use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\ResturantController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -77,38 +78,34 @@ Route::middleware('admin')->group(function () {
         Route::post('/update/category', 'UpdateCategory')->name('update.category');
         Route::get('/delete/category/{id}', 'DeleteCategory')->name('delete.category');
 
-
     });
 
 });
 
-  Route::controller(CityController::class)->group(function () {
-        Route::get('/all/city', 'AllCity')->name('all.city');
-        Route::get('/add/city', 'AddCity')->name('add.city');
-        Route::post('/store/city', 'StoreCity')->name('city.store');
-        Route::get('/edit/city/{id}', 'EditCity');
-        Route::post('/update/city', 'UpdateCity')->name('update.city');
-        Route::get('/delete/city/{id}', 'DeleteCity')->name('delete.city');
-       
+Route::controller(CityController::class)->group(function () {
+    Route::get('/all/city', 'AllCity')->name('all.city');
+    Route::get('/add/city', 'AddCity')->name('add.city');
+    Route::post('/store/city', 'StoreCity')->name('city.store');
+    Route::get('/edit/city/{id}', 'EditCity');
+    Route::post('/update/city', 'UpdateCity')->name('update.city');
+    Route::get('/delete/city/{id}', 'DeleteCity')->name('delete.city');
 
+});
 
-    });
+// Start Client Middleware
+Route::middleware('client')->group(function () {
 
-
-    // Start Client Middleware
-    Route::middleware('client')->group(function () {
-
-    Route::controller(ResturantController::class)->group(function(){
+    Route::controller(ResturantController::class)->group(function () {
         Route::get('/all/menu', 'AllMenu')->name('all.menu');
         Route::get('/add/menu', 'AddMenu')->name('add.menu');
         Route::post('/store/menu', 'StoreMenu')->name('store.menu');
         Route::get('/edit/menu/{id}', 'EditMenu')->name('edit.menu');
         Route::post('/update/menu', 'UpdateMenu')->name('update.menu');
         Route::get('/delete/menu/{id}', 'DeleteMenu')->name('delete.menu');
-       
+
     });
 
-       Route::controller(ProductController::class)->group(function(){
+    Route::controller(ProductController::class)->group(function () {
         Route::get('/all/product', 'AllProduct')->name('all.product');
         Route::get('/add/product', 'AddProduct')->name('add.product');
         Route::post('/store/product', 'StoreProduct')->name('store.product');
@@ -116,21 +113,28 @@ Route::middleware('admin')->group(function () {
         Route::post('/update/product', 'UpdateProduct')->name('update.product');
         Route::get('/delete/product/{id}', 'DeleteProduct')->name('delete.product');
         Route::get('/changeStatus', 'ChangeStatus');
-      
-       
+
     });
 
-     Route::controller(GalleryController::class)->group(function(){
+    Route::controller(GalleryController::class)->group(function () {
         Route::get('/all/gallery', 'AllGallery')->name('all.gallery');
         Route::get('/add/gallery', 'AddGallery')->name('add.gallery');
         Route::post('/store/gallery', 'StoreGallery')->name('store.gallery');
         Route::get('/edit/gallery/{id}', 'EditGallery')->name('edit.gallery');
         Route::post('/update/gallery', 'UpdateGallery')->name('update.gallery');
         Route::get('/delete/gallery/{id}', 'DeleteGallery')->name('delete.gallery');
-        
-      
-       
+
     });
-    
+
+    Route::controller(CouponController::class)->group(function () {
+        Route::get('/all/coupon', 'AllCoupon')->name('all.coupon');
+        Route::get('/add/coupon', 'AddCoupon')->name('add.coupon');
+        Route::post('/store/coupon', 'StoreCoupon')->name('store.coupon');
+        Route::get('/edit/coupon/{id}', 'EditCoupon')->name('edit.coupon');
+        Route::post('/update/coupon', 'UpdateCoupon')->name('coupon.update');
+        Route::get('/delete/coupon/{id}', 'DeleteCoupon')->name('delete.coupon');
+
+    });
+
 });
- // End Client Middleware
+// End Client Middleware
