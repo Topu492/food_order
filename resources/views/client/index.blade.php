@@ -1,7 +1,20 @@
 @extends('client.client_dashboard')
 @section('client')
+    @php
+        $id = Auth::guard('client')->id();
+        $client = App\Models\Client::find($id);
+        $status = $client->status;
+    @endphp
+
     <div class="page-content">
         <div class="container-fluid">
+
+            @if ($status === '1')
+                <h4>Restaurant Account is <span class="text-success">Active</span> </h4>
+            @else
+                <h4>Restaurant Account is <span class="text-danger">InActive</span> </h4>
+                <p class="text-danger"><b>Plz wait admin will check and approve your account </b> </p>
+            @endif
 
             <!-- start page title -->
             <div class="row">
@@ -204,7 +217,6 @@
                                             </select>
                                         </div>
                                     </div>
-
                                     <div class="row align-items-center">
                                         <div class="col-sm">
                                             <div id="invested-overview" data-colors='["#5156be", "#34c38f"]'
@@ -214,10 +226,8 @@
                                             <div class="mt-4 mt-sm-0">
                                                 <p class="mb-1">Invested Amount</p>
                                                 <h4>$ 6134.39</h4>
-
                                                 <p class="text-muted mb-4"> + 0.0012.23 ( 0.2 % ) <i
                                                         class="mdi mdi-arrow-up ms-1 text-success"></i></p>
-
                                                 <div class="row g-0">
                                                     <div class="col-6">
                                                         <div>
@@ -234,7 +244,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <div class="mt-2">
                                                     <a href="#" class="btn btn-primary btn-sm">View more <i
                                                             class="mdi mdi-arrow-right ms-1"></i></a>
@@ -314,7 +323,6 @@
                                             <!-- end carousel-item -->
                                         </div>
                                         <!-- end carousel-inner -->
-
                                         <div class="carousel-indicators carousel-indicators-rounded">
                                             <button type="button" data-bs-target="#carouselExampleCaptions"
                                                 data-bs-slide-to="0" class="active" aria-current="true"
@@ -338,8 +346,6 @@
                 </div>
                 <!-- end col -->
             </div> <!-- end row-->
-
-
         </div>
         <!-- container-fluid -->
     </div>

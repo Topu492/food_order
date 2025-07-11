@@ -88,10 +88,15 @@ Route::middleware('admin')->group(function () {
         Route::get('admin/edit/product/{id}', 'AdminEditProduct')->name('admin.edit.product');
         Route::post('admin/update/product', 'AdminUpdateProduct')->name('admin.update.product');
         Route::get('admin/delete/product/{id}', 'AdminDeleteProduct')->name('admin.delete.product');
-      
 
     });
-    
+
+    Route::controller(ManageController::class)->group(function () {
+        Route::get('pending/restaurant', 'PendingRestaurant')->name('pending.restaurant');
+        Route::get('/approve/restaurant', 'ApproveRestaurant')->name('approve.restaurant');
+        Route::get('/clientchangeStatus', 'ClientChangeStatus');
+
+    });
 
 });
 
@@ -107,11 +112,8 @@ Route::controller(CityController::class)->group(function () {
 
 });
 
-
-
-
 // Start Client Middleware
-Route::middleware('client')->group(function () {
+Route::middleware(['client','status'])->group(function () {
 
     Route::controller(ResturantController::class)->group(function () {
         Route::get('/all/menu', 'AllMenu')->name('all.menu');
@@ -130,7 +132,6 @@ Route::middleware('client')->group(function () {
         Route::get('/edit/product/{id}', 'EditProduct')->name('edit.product');
         Route::post('/update/product', 'UpdateProduct')->name('update.product');
         Route::get('/delete/product/{id}', 'DeleteProduct')->name('delete.product');
-
 
     });
 
@@ -157,6 +158,5 @@ Route::middleware('client')->group(function () {
 });
 // End Client Middleware
 
-
 // That will be for all user
-  Route::get('/changeStatus', [ProductController::class, 'ChangeStatus']);
+Route::get('/changeStatus', [ProductController::class, 'ChangeStatus']);
