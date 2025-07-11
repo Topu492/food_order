@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\ManageController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Client\CouponController;
 use App\Http\Controllers\Client\GalleryController;
@@ -80,7 +81,21 @@ Route::middleware('admin')->group(function () {
 
     });
 
+    Route::controller(ManageController::class)->group(function () {
+        Route::get('admin/all/product', 'AdminAllProduct')->name('admin.all.product');
+        Route::get('admin/add/product', 'AdminAddProduct')->name('admin.add.product');
+        Route::post('admin/store/product', 'AdminStoreProduct')->name('admin.store.product');
+        Route::get('admin/edit/product/{id}', 'AdminEditProduct')->name('admin.edit.product');
+        Route::post('admin/update/product', 'AdminUpdateProduct')->name('admin.update.product');
+        Route::get('admin/delete/product/{id}', 'AdminDeleteProduct')->name('admin.delete.product');
+      
+
+    });
+    
+
 });
+
+// End Admin Middleware
 
 Route::controller(CityController::class)->group(function () {
     Route::get('/all/city', 'AllCity')->name('all.city');
@@ -91,6 +106,9 @@ Route::controller(CityController::class)->group(function () {
     Route::get('/delete/city/{id}', 'DeleteCity')->name('delete.city');
 
 });
+
+
+
 
 // Start Client Middleware
 Route::middleware('client')->group(function () {
@@ -112,7 +130,7 @@ Route::middleware('client')->group(function () {
         Route::get('/edit/product/{id}', 'EditProduct')->name('edit.product');
         Route::post('/update/product', 'UpdateProduct')->name('update.product');
         Route::get('/delete/product/{id}', 'DeleteProduct')->name('delete.product');
-        Route::get('/changeStatus', 'ChangeStatus');
+
 
     });
 
@@ -138,3 +156,7 @@ Route::middleware('client')->group(function () {
 
 });
 // End Client Middleware
+
+
+// That will be for all user
+  Route::get('/changeStatus', [ProductController::class, 'ChangeStatus']);
