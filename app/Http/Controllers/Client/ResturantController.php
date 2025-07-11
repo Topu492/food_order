@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 
@@ -11,7 +12,8 @@ class ResturantController extends Controller
 {
     public function AllMenu()
     {
-        $menu = Menu::latest()->get();
+        $id   = Auth::guard('client')->id();
+        $menu = Menu::where('client_id', $id)->orderBy('id', 'desc')->get();
         return view('client.backend.menu.all_menu', compact('menu'));
     }
     // End Method
@@ -35,6 +37,7 @@ class ResturantController extends Controller
 
             Menu::create([
                 'menu_name' => $request->menu_name,
+                 'client_id' => Auth::guard('client')->id(),
                 'image'     => $save_url,
             ]);
         }
