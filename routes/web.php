@@ -98,6 +98,15 @@ Route::middleware('admin')->group(function () {
 
     });
 
+    Route::controller(ManageController::class)->group(function () {
+        Route::get('all/banner', 'AllBanner')->name('all.banner');
+        Route::post('store/banner', 'BannerStore')->name('banner.store');
+        Route::get('/edit/banner/{id}', 'EditBanner');
+        Route::post('/banner/update', 'BannerUpdate')->name('banner.update');
+        Route::get('/delete/banner/{id}', 'DeleteBanner')->name('delete.banner');
+
+    });
+
 });
 
 // End Admin Middleware
@@ -113,7 +122,7 @@ Route::controller(CityController::class)->group(function () {
 });
 
 // Start Client Middleware
-Route::middleware(['client','status'])->group(function () {
+Route::middleware(['client', 'status'])->group(function () {
 
     Route::controller(ResturantController::class)->group(function () {
         Route::get('/all/menu', 'AllMenu')->name('all.menu');
