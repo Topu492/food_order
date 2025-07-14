@@ -9,6 +9,7 @@ use App\Http\Controllers\Client\CouponController;
 use App\Http\Controllers\Client\GalleryController;
 use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\ResturantController;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -169,3 +170,8 @@ Route::middleware(['client', 'status'])->group(function () {
 
 // That will be for all user
 Route::get('/changeStatus', [ProductController::class, 'ChangeStatus']);
+
+Route::controller(HomeController::class)->group(function(){
+    Route::get('/restaurant/details/{id}', 'RestaurantDetails')->name('res.details'); 
+    
+});

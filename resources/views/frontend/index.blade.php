@@ -8,16 +8,19 @@
                 <span class="line"></span>
             </div>
             <div class="row">
+
                 @php
                     $clients = App\Models\Client::latest()->where('status', '1')->get();
                 @endphp
+
                 @foreach ($clients as $client)
                     @php
-                        $products = App\Models\Product::where('client_id', $client->id)->limit(3)->get();
+                        $products = App\Models\Product::with('menu')->where('client_id', $client->id)->limit(3)->get();
                         $menuNames = $products
                             ->map(function ($product) {
-                                return $product->menu->menu_name;
+                                return $product->menu ? $product->menu->menu_name : null;
                             })
+                            ->filter()
                             ->toArray();
                         $menuNamesString = implode(' . ', $menuNames);
                         $coupons = App\Models\Coupon::where('client_id', $client->id)->where('status', '1')->first();
@@ -35,15 +38,16 @@
                                                 class="badge badge-dark">Promoted</span></div>
                                     @else
                                     @endif
-                                    <a href="detail.html">
+
+                                    <a href="{{ route('res.details', $client->id) }}">
                                         <img src="{{ asset('upload/client_images/' . $client->photo) }}"
                                             class="img-fluid item-img" style="width: 300px; height:200px;">
                                     </a>
                                 </div>
                                 <div class="p-3 position-relative">
                                     <div class="list-card-body">
-                                        <h6 class="mb-1"><a href="detail.html" class="text-black">{{ $client->name }}</a>
-                                        </h6>
+                                        <h6 class="mb-1"><a href="{{ route('res.details', $client->id) }}"
+                                                class="text-black">{{ $client->name }}</a></h6>
                                         <p class="text-gray mb-3"> {{ $menuNamesString }}</p>
                                         <p class="text-gray mb-3 time"><span
                                                 class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i
@@ -68,5 +72,4 @@
             </div>
         </div>
     </section>
-
 @endsection

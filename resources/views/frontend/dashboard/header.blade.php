@@ -20,6 +20,11 @@
     <link href="{{ asset('frontend/vendor/select2/css/select2.min.css') }}" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="{{ asset('frontend/css/osahan.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('frontend/vendor/owl-carousel/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/vendor/owl-carousel/owl.theme.css') }}">
+
+
 </head>
 
 <body>
@@ -49,8 +54,11 @@
 
                     </li>
                     @php
-                        $id = Auth::user()->id;
-                        $profileData = App\Models\User::find($id);
+                        $profileData = null;
+                        if (Auth::check()) {
+                            $id = Auth::user()->id;
+                            $profileData = App\Models\User::find($id);
+                        }
                     @endphp
 
                     <li class="nav-item dropdown">
@@ -87,8 +95,8 @@
                                     Sub 12" (30 cm) x 1 <span class="float-right text-secondary">$314</span></p>
                                 <p class="mb-2"><i class="icofont-ui-press text-success food-item"></i> Corn & Peas
                                     Salad x 1 <span class="float-right text-secondary">$209</span></p>
-                                <p class="mb-2"><i class="icofont-ui-press text-success food-item"></i> Veg Seekh Sub
-                                    6" (15 cm) x 1 <span class="float-right text-secondary">$133</span></p>
+                                <p class="mb-2"><i class="icofont-ui-press text-success food-item"></i> Veg Seekh
+                                    Sub 6" (15 cm) x 1 <span class="float-right text-secondary">$133</span></p>
                                 <p class="mb-2"><i class="icofont-ui-press text-danger food-item"></i> Chicken Tikka
                                     Sub 12" (30 cm) x 1 <span class="float-right text-secondary">$314</span></p>
                                 <p class="mb-2"><i class="icofont-ui-press text-danger food-item"></i> Corn & Peas
