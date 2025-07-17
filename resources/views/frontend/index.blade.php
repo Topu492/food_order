@@ -8,19 +8,16 @@
                 <span class="line"></span>
             </div>
             <div class="row">
-
                 @php
                     $clients = App\Models\Client::latest()->where('status', '1')->get();
                 @endphp
-
                 @foreach ($clients as $client)
                     @php
-                        $products = App\Models\Product::with('menu')->where('client_id', $client->id)->limit(3)->get();
+                        $products = App\Models\Product::where('client_id', $client->id)->limit(3)->get();
                         $menuNames = $products
                             ->map(function ($product) {
-                                return $product->menu ? $product->menu->menu_name : null;
+                                return $product->menu->menu_name;
                             })
-                            ->filter()
                             ->toArray();
                         $menuNamesString = implode(' . ', $menuNames);
                         $coupons = App\Models\Coupon::where('client_id', $client->id)->where('status', '1')->first();
@@ -31,7 +28,8 @@
                                 <div class="list-card-image">
                                     <div class="star position-absolute"><span class="badge badge-success"><i
                                                 class="icofont-star"></i> 3.1 (300+)</span></div>
-                                    <div class="favourite-heart text-danger position-absolute"><a href="detail.html"><i
+                                    <div class="favourite-heart text-danger position-absolute"><a
+                                            aria-label="Add to Wishlist" onclick="addWishList({{ $client->id }})"><i
                                                 class="icofont-heart"></i></a></div>
                                     @if ($coupons)
                                         <div class="member-plan position-absolute"><span

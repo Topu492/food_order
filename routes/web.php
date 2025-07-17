@@ -171,7 +171,7 @@ Route::middleware(['client', 'status'])->group(function () {
 // That will be for all user
 Route::get('/changeStatus', [ProductController::class, 'ChangeStatus']);
 
-Route::controller(HomeController::class)->group(function(){
-    Route::get('/restaurant/details/{id}', 'RestaurantDetails')->name('res.details'); 
-    
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/restaurant/details/{id}', 'RestaurantDetails')->name('res.details');
+    Route::post('/add-wish-list/{id}', 'AddWishList');
 });
