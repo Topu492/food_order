@@ -9,6 +9,7 @@ use App\Http\Controllers\Client\CouponController;
 use App\Http\Controllers\Client\GalleryController;
 use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\ResturantController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -180,4 +181,11 @@ Route::controller(HomeController::class)->group(function () {
     // Get Wishlist data for user 
     Route::post('/add-wish-list/{id}', 'AddWishList');
     Route::get('/remove/wishlist/{id}', [HomeController::class, 'RemoveWishlist'])->name('remove.wishlist');
+});
+
+Route::controller(CartController::class)->group(function(){
+    Route::get('/add_to_cart/{id}', 'AddToCart')->name('add_to_cart');  
+    Route::post('/cart/update-quantity', 'updateCartQuanity')->name('cart.updateQuantity');
+    Route::post('/cart/remove', 'CartRemove')->name('cart.remove');  
+    
 });

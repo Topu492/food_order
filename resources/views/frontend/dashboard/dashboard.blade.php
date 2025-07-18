@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Askbootstrap">
     <meta name="author" content="Askbootstrap">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>User Dashboard - Online Food Ordering Website</title>
     <!-- Favicon Icon -->
     <link rel="icon" type="image/png" href="{{ asset('frontend/img/favicon.png') }}">
@@ -20,8 +21,12 @@
     <link href="{{ asset('frontend/vendor/select2/css/select2.min.css') }}" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="{{ asset('frontend/css/osahan.css') }}" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('frontend/vendor/owl-carousel/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/vendor/owl-carousel/owl.theme.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+
 </head>
 
 <body>
@@ -32,6 +37,7 @@
 
     @include('frontend.dashboard.footer')
 
+
     <!-- jQuery -->
     <script src="{{ asset('frontend/vendor/jquery/jquery-3.3.1.slim.min.js') }}"></script>
     <!-- Bootstrap core JavaScript-->
@@ -41,7 +47,13 @@
     <script src="{{ asset('frontend/vendor/owl-carousel/owl.carousel.js') }}"></script>
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('frontend/js/custom.js') }}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <script>
         @if (Session::has('message'))
             var type = "{{ Session::get('alert-type', 'info') }}"
@@ -64,6 +76,17 @@
             }
         @endif
     </script>
+
+    <script>
+        < script type = "text/javascript" >
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+    </script>
+
+
 </body>
 
 </html>

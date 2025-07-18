@@ -23,8 +23,12 @@
 
                   </li>
                   @php
-                      $id = Auth::user()->id;
-                      $profileData = App\Models\User::find($id);
+                      $profileData = null;
+
+                      if (Auth::check()) {
+                          $id = Auth::user()->id;
+                          $profileData = App\Models\User::find($id);
+                      }
                   @endphp
 
                   <li class="nav-item dropdown">
