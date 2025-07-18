@@ -42,4 +42,23 @@ class HomeController extends Controller
         }
 
     }
+
+    public function AllWishlist()
+    {
+        $wishlist = Wishlist::where('user_id', Auth::id())->get();
+        return view('frontend.dashboard.all_wishlist', compact('wishlist'));
+    }
+    //End Method
+
+    public function RemoveWishlist($id){
+        Wishlist::find($id)->delete();
+
+        $notification = array(
+            'message' => 'Wishlist Deleted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+     //End Method
 }
