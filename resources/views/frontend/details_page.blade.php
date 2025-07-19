@@ -1,7 +1,6 @@
 @extends('frontend.dashboard.dashboard')
 @section('dashboard')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     @php
         $products = App\Models\Product::where('client_id', $client->id)->limit(3)->get();
@@ -153,7 +152,8 @@
                                                 <div class="list-card-image">
                                                     <div class="star position-absolute"><span
                                                             class="badge badge-success"><i class="icofont-star"></i> 3.1
-                                                            (300+)</span></div>
+                                                            (300+)
+                                                        </span></div>
                                                     <div class="favourite-heart text-danger position-absolute"><a
                                                             href="#"><i class="icofont-heart"></i></a></div>
                                                     <div class="member-plan position-absolute"><span
@@ -213,7 +213,8 @@
                                                             <div class="media-body">
                                                                 <h6 class="mb-1">{{ $product->name }}</h6>
                                                                 <p class="text-gray mb-0">${{ $product->price }}
-                                                                    ({{ $product->size ?? '' }} cm)</p>
+                                                                    ({{ $product->size ?? '' }} cm)
+                                                                </p>
 
                                                             </div>
                                                         </div>
@@ -645,7 +646,7 @@
 
                         </div>
 
-                        <a href="checkout.html" class="btn btn-success btn-block btn-lg">Checkout <i
+                        <a href="{{ route('checkout') }}" class="btn btn-success btn-block btn-lg">Checkout <i
                                 class="icofont-long-arrow-right"></i></a>
                     </div>
 

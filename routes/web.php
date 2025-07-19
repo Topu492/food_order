@@ -190,5 +190,7 @@ Route::controller(CartController::class)->group(function(){
     
     Route::post('/apply-coupon', 'ApplyCoupon');
     Route::get('/remove-coupon', 'CouponRemove');
+
+    Route::get('/checkout', 'ShopCheckout')->name('checkout');
     
 });
