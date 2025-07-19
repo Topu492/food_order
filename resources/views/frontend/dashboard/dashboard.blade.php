@@ -21,23 +21,16 @@
     <link href="{{ asset('frontend/vendor/select2/css/select2.min.css') }}" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="{{ asset('frontend/css/osahan.css') }}" rel="stylesheet">
-
     <link rel="stylesheet" href="{{ asset('frontend/vendor/owl-carousel/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/vendor/owl-carousel/owl.theme.css') }}">
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
-
 </head>
 
 <body>
-
     @include('frontend.dashboard.header')
-
     @yield('dashboard')
-
     @include('frontend.dashboard.footer')
-
-
     <!-- jQuery -->
     <script src="{{ asset('frontend/vendor/jquery/jquery-3.3.1.slim.min.js') }}"></script>
     <!-- Bootstrap core JavaScript-->
@@ -77,16 +70,104 @@
         @endif
     </script>
 
-    <script>
-        < script type = "text/javascript" >
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     </script>
 
+    {{-- //// Apply Coupon start /////////////// --}}
+    <script>
+        function ApplyCoupon() {
+            var coupon_name = $('#coupon_name').val();
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                data: {
+                    coupon_name: coupon_name
+                },
+                url: "/apply-coupon",
+                success: function(data) {
 
+                    // Start Message 
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success,
+                        });
+                        location.reload();
+
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error,
+                        })
+                    }
+
+                    // End Message 
+
+
+                }
+            })
+        }
+    </script>
+
+    <script>
+        function couponRemove() {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "/remove-coupon",
+                success: function(data) {
+
+                    // Start Message 
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success,
+                        });
+                        location.reload();
+
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error,
+                        })
+                    }
+
+                    // End Message 
+
+                }
+            })
+        }
+    </script>
 </body>
 
 </html>
