@@ -2,6 +2,7 @@
 @section('dashboard')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
     </script>
+
     <section class="offer-dedicated-body mt-4 mb-4 pt-2 pb-2">
         <div class="container">
             <div class="row">
@@ -12,6 +13,7 @@
                             $id = Auth::user()->id;
                             $profileData = App\Models\User::find($id);
                         @endphp
+
 
                         <div class="pt-2"></div>
                         <div class="bg-white rounded shadow-sm p-4 mb-4">
@@ -86,9 +88,16 @@
                                             <h6 class="mb-3 mt-0">Cash</h6>
                                             <p>Please keep exact change handy to help us serve you better</p>
                                             <hr>
-                                            <form>
-                                                <a href="thanks.html" class="btn btn-success btn-block btn-lg">PAY $1329
-                                                    <i class="icofont-long-arrow-right"></i></a>
+                                            <form action="{{ route('cash_order') }}" method="post">
+                                                @csrf
+
+                                                <input type="hidden" name="name" value="{{ Auth::user()->name }}">
+                                                <input type="hidden" name="email" value="{{ Auth::user()->email }}">
+                                                <input type="hidden" name="phone" value="{{ Auth::user()->phone }}">
+                                                <input type="hidden" name="address" value="{{ Auth::user()->address }}">
+
+                                                <button type="submit" class="btn btn-success btn-block btn-lg">PAY
+                                                    <i class="icofont-long-arrow-right"></i></button>
                                             </form>
                                         </div>
 
@@ -113,7 +122,8 @@
                                                                 placeholder="Card number">
                                                             <div class="input-group-append">
                                                                 <button class="btn btn-outline-secondary" type="button"
-                                                                    id="button-addon2"><i class="icofont-card"></i></button>
+                                                                    id="button-addon2"><i
+                                                                        class="icofont-card"></i></button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -158,12 +168,10 @@
                         </div>
                     </div>
                 </div>
-
                 @php
                     $id = Auth::user()->id;
                     $profileData = App\Models\User::find($id);
                 @endphp
-
                 <div class="col-md-4">
                     <div class="generator-bg rounded shadow-sm mb-4 p-4 osahan-cart-item">
                         <div class="d-flex mb-4 osahan-cart-item-profile">
@@ -227,7 +235,6 @@
                                         @else
                                             ${{ $total }}
                                         @endif
-
                                     </span>
                                 </p>
                                 <hr />

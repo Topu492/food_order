@@ -11,6 +11,7 @@ use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\ResturantController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -193,4 +194,9 @@ Route::controller(CartController::class)->group(function(){
 
     Route::get('/checkout', 'ShopCheckout')->name('checkout');
     
+});
+
+Route::controller(OrderController::class)->group(function(){
+    Route::post('/cash_order', 'CashOrder')->name('cash_order');
+   
 });
