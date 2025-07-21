@@ -123,6 +123,13 @@ Route::middleware('admin')->group(function () {
     
     });
 
+    Route::controller(ManageOrderContrpller::class)->group(function(){
+        Route::get('/pening_to_confirm/{id}', 'PendingToConfirm')->name('pening_to_confirm');
+        Route::get('/confirm_to_processing/{id}', 'ConfirmToProcessing')->name('confirm_to_processing'); 
+        Route::get('/processing_to_deliverd/{id}', 'ProcessingToDiliverd')->name('processing_to_deliverd'); 
+
+    });
+
 });
 
 // End Admin Middleware

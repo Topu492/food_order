@@ -2,6 +2,7 @@
 @section('admin')
     <div class="page-content">
         <div class="container-fluid">
+
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">
@@ -10,16 +11,21 @@
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
+
                             </ol>
                         </div>
+
                     </div>
                 </div>
             </div>
             <!-- end page title -->
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+
                         <div class="card-body">
+
                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                 <thead>
                                     <tr>
@@ -32,6 +38,8 @@
                                         <th>Action </th>
                                     </tr>
                                 </thead>
+
+
                                 <tbody>
                                     @foreach ($allData as $key => $item)
                                         <tr>
@@ -50,12 +58,16 @@
                                             </td>
                                         </tr>
                                     @endforeach
+
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div> <!-- end col -->
             </div> <!-- end row -->
+
+
         </div> <!-- container-fluid -->
     </div>
 @endsection

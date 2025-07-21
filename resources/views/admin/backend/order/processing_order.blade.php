@@ -51,7 +51,7 @@
                                             <td><span class="badge bg-primary">{{ $item->status }}</span></td>
 
 
-                                            <td><a href=""
+                                            <td><a href="{{ route('admin.order.details', $item->id) }}"
                                                     class="btn btn-info waves-effect waves-light"> <i
                                                         class="fas fa-eye"></i> </a>
 
@@ -66,6 +66,8 @@
                     </div>
                 </div> <!-- end col -->
             </div> <!-- end row -->
+
+
         </div> <!-- container-fluid -->
     </div>
 @endsection
