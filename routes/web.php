@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ManageController;
+use App\Http\Controllers\Admin\ManageOrderContrpller;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Client\CouponController;
 use App\Http\Controllers\Client\GalleryController;
@@ -111,6 +112,15 @@ Route::middleware('admin')->group(function () {
         Route::post('/banner/update', 'BannerUpdate')->name('banner.update');
         Route::get('/delete/banner/{id}', 'DeleteBanner')->name('delete.banner');
 
+    });
+
+    Route::controller(ManageOrderContrpller::class)->group(function(){
+        Route::get('/pending/order', 'PendingOrder')->name('pending.order'); 
+        Route::get('/confirm/order', 'ConfirmOrder')->name('confirm.order'); 
+        Route::get('/processing/order', 'ProcessingOrder')->name('processing.order'); 
+        Route::get('/deliverd/order', 'DeliverdOrder')->name('deliverd.order'); 
+        Route::get('/admin/order/details/{id}', 'AdminOrderDetails')->name('admin.order.details'); 
+    
     });
 
 });
