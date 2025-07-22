@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ManageOrderContrpller extends Controller
 {
@@ -76,5 +77,52 @@ class ManageOrderContrpller extends Controller
         return redirect()->route('deliverd.order')->with($notification);
     }
     //End Method 
+
+
+    public function AllClientOrders(){
+        $clientId = Auth::guard('client')->id();
+
+        $orderItemGroupData = OrderItem::with(['product','order'])->where('client_id',$clientId)
+        ->orderBy('order_id','desc')
+        ->get()
+        ->groupBy('order_id');
+        return view('client.backend.order.all_orders',compact('orderItemGroupData'));
+    }
+      //End Method 
+
+       public function ClientOrderDetails($id){
+        $order = Order::with('user')->where('id',$id)->first();
+        $orderItem = OrderItem::with('product')->where('order_id',$id)->orderBy('id','desc')->get();
+
+        $totalPrice = 0;
+        foreach($orderItem as $item){
+            $totalPrice += $item->price * $item->qty;
+        }
+
+        return view('client.backend.order.client_order_details',compact('order','orderItem','totalPrice'));
+
+    }
+     //End Method 
+
+
+      public function UserOrderList(){
+        $userId = Auth::user()->id;
+        $allUserOrder = Order::where('user_id',$userId)->orderBy('id','desc')->get();
+        return view('frontend.dashboard.order.order_list',compact('allUserOrder'));
+    }
+      //End Method 
+
+       public function UserOrderDetails($id){
+        $order = Order::with('user')->where('id',$id)->where('user_id',Auth::id())->first();
+        $orderItem = OrderItem::with('product')->where('order_id',$id)->orderBy('id','desc')->get();
+
+        $totalPrice = 0;
+        foreach($orderItem as $item){
+            $totalPrice += $item->price * $item->qty;
+        }
+
+        return view('frontend.dashboard.order.order_details',compact('order','orderItem','totalPrice'));
+    }
+     //End Method
 
 }

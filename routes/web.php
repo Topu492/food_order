@@ -23,9 +23,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserController::class, 'Index'])->name('index');
 
+
 Route::get('/dashboard', function () {
-    return view('frontend.dashboard.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return view('frontend.dashboard.profile');
+})->middleware(['auth', 'verified'])->name('dashboard');;
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -187,6 +188,11 @@ Route::middleware(['client', 'status'])->group(function () {
 
     });
 
+    Route::controller(ManageOrderContrpller::class)->group(function(){
+        Route::get('/all/client/orders', 'AllClientOrders')->name('all.client.orders'); 
+         Route::get('/client/order/details/{id}', 'ClientOrderDetails')->name('client.order.details'); 
+    });
+
 });
 // End Client Middleware
 
@@ -200,6 +206,12 @@ Route::controller(HomeController::class)->group(function () {
     Route::post('/add-wish-list/{id}', 'AddWishList');
     Route::get('/remove/wishlist/{id}', [HomeController::class, 'RemoveWishlist'])->name('remove.wishlist');
 });
+
+Route::controller(ManageOrderContrpller::class)->group(function(){
+        Route::get('/user/order/list', 'UserOrderList')->name('user.order.list'); 
+        Route::get('/user/order/details/{id}', 'UserOrderDetails')->name('user.order.details'); 
+    
+    });
 
 Route::controller(CartController::class)->group(function(){
     Route::get('/add_to_cart/{id}', 'AddToCart')->name('add_to_cart');  
