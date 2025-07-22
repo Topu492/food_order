@@ -52,7 +52,7 @@
                                                                 class="btn-small d-block text-primary"> <i
                                                                     class="fas fa-eye"></i> View</a>
 
-                                                            <a href="{{ route('admin.order.details', $item->id) }}"
+                                                            <a href="{{ route('user.invoice.download', $item->id) }}"
                                                                 class="btn-small d-block text-danger"> <i
                                                                     class="fa fa-download"></i> Invoice</a>
 

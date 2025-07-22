@@ -1,6 +1,10 @@
 @php
-    $id = Auth::user()->id;
-    $profileData = App\Models\User::find($id);
+     $profileData = null;
+
+    if (Auth::check()) {
+        $id = Auth::user()->id;
+        $profileData = App\Models\User::find($id);
+    }
 @endphp
 <div class="col-md-3">
     <div class="osahan-account-page-left shadow-sm rounded bg-white h-100">

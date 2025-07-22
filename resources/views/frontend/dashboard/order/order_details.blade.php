@@ -1,8 +1,12 @@
 @extends('frontend.dashboard.dashboard')
 @section('dashboard')
     @php
+        $profileData = null;
+
+    if (Auth::check()) {
         $id = Auth::user()->id;
         $profileData = App\Models\User::find($id);
+    }
     @endphp
 
     <section class="section pt-4 pb-4 osahan-account-page">
