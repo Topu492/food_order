@@ -12,6 +12,7 @@ use App\Http\Controllers\Client\GalleryController;
 use App\Http\Controllers\Client\ProductController;
 use App\Http\Controllers\Client\ResturantController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\FilterController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\ReviewController;
@@ -264,3 +265,9 @@ Route::controller(ReviewController::class)->group(function(){
     Route::post('/store/review', 'StoreReview')->name('store.review');  
     
 });
+
+Route::controller(FilterController::class)->group(function(){
+    Route::get('/list/restaurant', 'ListRestaurant')->name('list.restaurant');  
+    Route::get('/filter/products', 'FilterProducts')->name('filter.products');
+});
+
