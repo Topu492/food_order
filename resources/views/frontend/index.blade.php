@@ -8,9 +8,11 @@
                 <span class="line"></span>
             </div>
             <div class="row">
+
                 @php
                     $clients = App\Models\Client::latest()->where('status', '1')->get();
                 @endphp
+
                 @foreach ($clients as $client)
                     @php
                         $products = App\Models\Product::where('client_id', $client->id)->limit(3)->get();
@@ -22,12 +24,24 @@
                         $menuNamesString = implode(' . ', $menuNames);
                         $coupons = App\Models\Coupon::where('client_id', $client->id)->where('status', '1')->first();
                     @endphp
+
+                    @php
+                        $reviewcount = App\Models\Review::where('client_id', $client->id)
+                            ->where('status', 1)
+                            ->latest()
+                            ->get();
+                        $avarage = App\Models\Review::where('client_id', $client->id)
+                            ->where('status', 1)
+                            ->avg('rating');
+                    @endphp
+
                     <div class="col-md-3">
                         <div class="item pb-3">
                             <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                                 <div class="list-card-image">
                                     <div class="star position-absolute"><span class="badge badge-success"><i
-                                                class="icofont-star"></i> 3.1 (300+)</span></div>
+                                                class="icofont-star"></i>{{ number_format($avarage, 1) }}
+                                            ({{ count($reviewcount) }}+)</span></div>
                                     <div class="favourite-heart text-danger position-absolute"><a
                                             aria-label="Add to Wishlist" onclick="addWishList({{ $client->id }})"><i
                                                 class="icofont-heart"></i></a></div>
