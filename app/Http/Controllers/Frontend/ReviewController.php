@@ -36,6 +36,34 @@ class ReviewController extends Controller
 
     }
     // End Method 
+
+    public function AdminPendingReview(){
+        $pedingReview = Review::where('status',0)->orderBy('id','desc')->get();
+        return view('admin.backend.review.view_pending_review',compact('pedingReview'));
+    }
+     // End Method 
+
+     public function AdminApproveReview(){
+        $approveReview = Review::where('status',1)->orderBy('id','desc')->get();
+        return view('admin.backend.review.view_approve_review',compact('approveReview'));
+    }
+     // End Method 
+
+     public function ReviewChangeStatus(Request $request){
+        $review = Review::find($request->review_id);
+        $review->status = $request->status;
+        $review->save();
+        return response()->json(['success' => 'Status Change Successfully']);
+    }
+     // End Method 
+
+        public function ClientAllReviews(){
+        $id = Auth::guard('client')->id();
+        $allreviews = Review::where('status',1)->where('client_id',$id)->orderBy('id','desc')->get();
+        return view('client.backend.review.view_all_review',compact('allreviews'));
+
+     }
+      // End Method 
    
 
 }
